@@ -1,0 +1,38 @@
+create table students(sname varchar(255), 
+                    susn varchar(10) not null, 
+                    sphone int, 
+                    sdep varchar(25), 
+                    smail varchar(199),
+                    primary key (susn));
+
+create table parents(pname varchar(255),  
+                    pphone int not null, 
+                    pmail varchar(199),
+                    susn varchar(10) not null,
+                    foreign key (susn) references students(susn), 
+                    constraint parkeys primary key (susn, pphone));                    
+                    
+create table faculty(facname varchar(255), 
+                    facid varchar(25) not null,
+                    facphone int  not null, 
+                    facdep varchar(25),
+                    susn varchar(10) not null,
+                    foreign key (susn) references students(susn), 
+                    constraint fackeys primary key (susn, facid));    
+                    
+create table subjects(subname varchar(255), 
+                    subcode varchar(25) not null, 
+                    susn varchar(10) not null, 
+                    foreign key (susn) references students(susn),
+	            constraint subkeys primary key (susn, subcode));
+                    
+create table status(statusvalue varchar(255),
+                    susn varchar(10) not null, 
+                    foreign key (susn) references students(susn),
+                    constraint statkeys primary key (susn, statusvalue)); 
+                    
+create table dayz(datez varchar(255), 
+                 timez varchar(255),
+                 susn varchar(10) not null,   
+                 foreign key (susn) references students(susn),   
+                 constraint daykeys primary key (susn, datez));                    
